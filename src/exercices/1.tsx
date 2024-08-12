@@ -1,19 +1,24 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/prefer-ts-expect-error */
 import clsx from "clsx";
+import {ComponentPropsWithoutRef, PropsWithChildren } from "react";
 
 // 🦁 Supprime ce commentaire et définis correctement les types pour ce composant
-type SquareProps = any;
+type SquareProps = {
+isWinningSquare?: boolean;
+}&ComponentPropsWithoutRef<"button">;
 
-const Square = (props: SquareProps) => {
+const Square = ({isWinningSquare, children, ...props}:PropsWithChildren<SquareProps>) => {
   // 🦁 Remplace ça par les props définies en haut
   return (
     <button
       className={clsx("square", {
-        "winning-square": false, // 🦁 Remplace ça par la prop isWinningSquare
+        "winning-square": isWinningSquare, // 🦁 Remplace ça par la prop isWinningSquare
       })}
+      {...props}
+      onClick={() => {console.log("Square clicked")}}
     >
-      O {/* 🦁 Remplace ça par la prop children */}
+      {children}
     </button>
   );
 };
